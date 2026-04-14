@@ -49,11 +49,18 @@ export async function GET(_req: NextRequest) {
   }
 
   // ── Top routes ───────────────────────────────────────────
-  const allLoads = await prisma.load.findMany({ select: { origin: true, destination: true } });
+  const allLoads = await prisma.load.findMany({ select: { routes: true } });
   const routeMap: Record<string, number> = {};
   allLoads.forEach(l => {
-    const key = `${l.origin} → ${l.destination}`;
-    routeMap[key] = (routeMap[key] || 0) + 1;
+    const routes = l.routes as any[];
+    if (Array.isArray(routes)) {
+      routes.forEach(r => {
+        if (r.origin && r.destination) {
+          const key = `${r.origin} → ${r.destination}`;
+          routeMap[key] = (routeMap[key] || 0) + 1;
+        }
+      });
+    }
   });
   const topRoutes = Object.entries(routeMap)
     .sort((a, b) => b[1] - a[1])

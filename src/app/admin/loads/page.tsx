@@ -7,11 +7,9 @@ interface AdminLoad {
   id: string;
   refNumber: string;
   status: string;
-  origin: string;
-  destination: string;
+  routes: any[];
   cargoType: string;
   cargoWeight: number;
-  truckType: string;
   pickupDate: string;
   createdAt: string;
   isUrgent: boolean;
@@ -127,7 +125,12 @@ export default function AdminLoadsPage() {
                     <div className="text-xs text-text-muted">{load.shipper.name}</div>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="font-bold text-sm" style={{ color: 'var(--text-primary-dark)' }}>{load.origin} → {load.destination}</div>
+                    <div className="font-bold text-sm" style={{ color: 'var(--text-primary-dark)' }}>
+                      {load.routes?.[0]?.origin} → {load.routes?.[0]?.destination}
+                      {load.routes?.length > 1 && (
+                        <span className="text-[10px] bg-amber text-navy px-1.5 rounded ml-2">+{load.routes.length - 1}</span>
+                      )}
+                    </div>
                   </td>
                   <td className="px-4 py-3">
                     <div className="text-xs">{load.cargoType}</div>
