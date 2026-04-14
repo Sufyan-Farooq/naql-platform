@@ -1,0 +1,158 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  SHIPPER
+  CARRIER
+  ADMIN
+}
+
+enum UserStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum LoadStatus {
+  ACTIVE
+  PENDING_ASSIGNMENT
+  IN_TRANSIT
+  DELIVERED
+  COMPLETED
+  CANCELLED
+}
+
+enum BidStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  COUNTERED
+}
+
+enum TripStatus {
+  ASSIGNED
+  AT_PICKUP
+  LOADED
+  IN_TRANSIT
+  AT_DELIVERY
+  DELIVERED
+  INVOICED
+}
+
+model User {
+  id           String     @id @default(cuid())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  email        String     @unique
+  passwordHash String
+  role         UserRole
+  status       UserStatus @default(PENDING)
+  name         String
+  company      String
+  phone        String?
+  crNumber     String?
+
+  // Relations
+  loads    Load[]    @relation("ShipperLoads")
+  bids     Bid[]     @relation("CarrierBids")
+  trips    Trip[]    @relation("CarrierTrips")
+  sessions Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Load {
+  id           String     @id @default(cuid())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  refNumber    String     @unique
+  status       LoadStatus @default(ACTIVE)
+
+  shipperId    String
+  shipper      User       @relation("ShipperLoads", fields: [shipperId], references: [id])
+
+  // Cargo Details
+  cargoContent String
+  cargoType    String
+  cargoWeight  Float?     @default(0) // Total weight of all cargo
+  routes       Json       // Array of { origin, destination, truckType, truckCount }
+  isUrgent     Boolean    @default(false)
+  bidCloseTime DateTime
+
+  // Relations
+  bids         Bid[]
+  trip         Trip?
+}
+
+model Bid {
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  status     BidStatus @default(PENDING)
+
+  loadId     String
+  load       Load      @relation(fields: [loadId], references: [id], onDelete: Cascade)
+
+  carrierId  String
+  carrier    User      @relation("CarrierBids", fields: [carrierId], references: [id])
+
+  price      Float
+  truckPlate String
+  etaHours   Int
+  notes      String?
+  routePrices Json?    // Array of { origin, destination, price }
+
+  trip       Trip?
+}
+
+model Trip {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  status    TripStatus @default(ASSIGNED)
+  progress  Int        @default(1)
+  events    Json
+
+  loadId    String     @unique
+  load      Load       @relation(fields: [loadId], references: [id])
+
+  bidId     String     @unique
+  bid       Bid        @relation(fields: [bidId], references: [id])
+
+  carrierId String
+  carrier   User       @relation("CarrierTrips", fields: [carrierId], references: [id])
+}
+
+model ContactSubmission {
+  id                  String   @id @default(cuid())
+  createdAt           DateTime @default(now())
+  type                String
+  name                String
+  email               String
+  countryCode         String
+  mobile              String
+  company             String
+  source              String?
+  message             String?
+  cargoType           String?
+  cargoWeight         String?
+  typeOfTruck         String?
+  noOfTrucks          String?
+  repeatOrder         String?
+  fleetSize           String?
+  operationalRegions  String?
+  truckTypesAvailable String[]
+  otherTruckTypes     String?
+  regularContracts    String?
+}
