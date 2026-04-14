@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&family=Noto+Sans+Arabic:wght@400;500;700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&family=Noto+Sans+Arabic:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 
 @import "tailwindcss";
 
@@ -6,25 +6,25 @@
    LIGHT MODE TOKENS (default)
    ============================================================ */
 :root {
-  --amber: #E8830A;
-  --amber-light: #F59D2E;
-  --amber-dim: rgba(232, 131, 10, 0.15);
-  --navy: #0D1B2A;
-  --navy-mid: #152436;
-  --navy-light: #1E3448;
-  --surface: #FAF7F2;
-  --surface-mid: #F0EDE8;
+  --amber: #FF6D00;
+  --amber-light: #FF8533;
+  --amber-dim: rgba(255, 109, 0, 0.15);
+  --navy: #33475B;
+  --navy-mid: #3E566E;
+  --navy-light: #4A6581;
+  --surface: #F8F9FA;
+  --surface-mid: #F1F3F5;
   --surface-card: #FFFFFF;
-  --sand: #D6CEBC;
-  --sand-dark: #B8AE9C;
+  --sand: #DEE2E6;
+  --sand-dark: #CED4DA;
   --teal: #0E7C6B;
   --teal-light: rgba(14, 124, 107, 0.15);
   --error: #C0392B;
   --error-light: rgba(192, 57, 43, 0.12);
-  --text-primary-dark: #0D1B2A;
-  --text-primary-light: #FAF7F2;
-  --text-muted: #6B6456;
-  --text-navy: #FAF7F2; /* Added for footer text in light mode */
+  --text-primary-dark: #1A242F;
+  --text-primary-light: #F8F9FA;
+  --text-muted: #64748B;
+  --text-navy: #F8F9FA; /* Added for footer text in light mode */
   --r: 6px;
 
   /* Portal */
@@ -43,26 +43,26 @@
    DARK MODE TOKENS
    ============================================================ */
 [data-theme="dark"] {
-  --surface: #0D1117;
-  --surface-mid: #161B22;
-  --surface-card: #1C2330;
-  --sand: #3A3F4B;
-  --sand-dark: #4A515F;
-  --text-primary-dark: #E8E3DC;
-  --text-muted: #8B949E;
+  --surface: #0B0F13;
+  --surface-mid: #121820;
+  --surface-card: #1A242F;
+  --sand: #2D3A4A;
+  --sand-dark: #3A4B5E;
+  --text-primary-dark: #F8F9FA;
+  --text-muted: #94A3B8;
   
-  --navy: #081018; /* Darker navy for backgrounds in dark mode */
-  --navy-mid: #101B28;
-  --navy-light: #1A2838;
-  --text-navy: #E8E3DC; /* Flipped text color for elements that were navy in light mode */
+  --navy: #121820; /* Darker navy for backgrounds in dark mode */
+  --navy-mid: #1A242F;
+  --navy-light: #243242;
+  --text-navy: #F8F9FA; /* Flipped text color for elements that were navy in light mode */
 
   /* Portal */
-  --portal-bg: #0D1117;
-  --portal-card: #1C2330;
-  --portal-header-bg: #161B22;
-  --portal-header-border: #30363D;
-  --portal-sidebar-bg: #081018;
-  --portal-sidebar-border: #30363D;
+  --portal-bg: #0B0F13;
+  --portal-card: #1A242F;
+  --portal-header-bg: #121820;
+  --portal-header-border: #2D3A4A;
+  --portal-sidebar-bg: #0F151C;
+  --portal-sidebar-border: #2D3A4A;
 
   /* Border */
   --border: #30363D;
@@ -75,7 +75,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: var(--surface);
   color: var(--text-primary-dark);
   -webkit-font-smoothing: antialiased;
@@ -96,7 +96,7 @@ body {
 .bg-navy { background-color: var(--navy); }
 .bg-amber { background-color: var(--amber); }
 .text-amber { color: var(--amber); }
-.text-navy { color: var(--text-navy, #0D1B2A); }
+.text-navy { color: var(--text-navy, var(--navy)); }
 .text-primary { color: var(--text-primary-dark); }
 .text-muted { color: var(--text-muted); }
 .border-sand { border-color: var(--sand); }
@@ -125,7 +125,7 @@ body {
   line-height: 1.8;
 }
 .font-display-en {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
 }
 
@@ -150,7 +150,7 @@ body {
 .badge-active   { background: var(--teal-light); color: var(--teal); border: 1px solid var(--teal); }
 .badge-pending  { background: var(--amber-dim); color: #8a4c00; border: 1px solid var(--amber); }
 .badge-cancelled{ background: var(--error-light); color: var(--error); border: 1px solid var(--error); }
-.badge-completed{ background: rgba(13,27,42,0.1); color: #0D1B2A; border: 1px solid #0D1B2A; }
+.badge-completed{ background: rgba(13,27,42,0.1); color: var(--navy); border: 1px solid var(--navy); }
 .badge-transit  { background: rgba(14,124,107,0.2); color: var(--teal); }
 
 [data-theme="dark"] .badge-completed { background: rgba(232,227,220,0.1); color: var(--text-primary-dark); border-color: var(--sand); }
@@ -267,7 +267,7 @@ body {
   gap: 8px;
   padding: 0 24px;
   height: 48px;
-  background: #0D1B2A;
+  background: var(--navy);
   color: white;
   border: none;
   border-radius: var(--r);
@@ -290,8 +290,8 @@ body {
 }
 .card:hover { box-shadow: 0 4px 24px rgba(13,27,42,0.08); }
 .card-dark {
-  background: #0D1B2A;
-  color: #FAF7F2;
+  background: var(--navy);
+  color: white;
   border-radius: var(--r);
 }
 .card-amber-border { border-left: 3px solid var(--amber); }

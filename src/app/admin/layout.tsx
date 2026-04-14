@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAppContext } from '@/context/AppContext';
 
@@ -19,17 +20,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--surface)' }}>
       {/* Sidebar */}
-      <aside className="w-64 shrink-0 flex flex-col" style={{ background: '#0D1B2A', minHeight: '100vh' }}>
+      <aside className="w-64 shrink-0 flex flex-col" style={{ background: 'var(--navy)', minHeight: '100vh' }}>
         {/* Logo */}
         <div className="p-6 border-b border-white/10">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-amber flex items-center justify-center text-white font-bold text-lg">N</div>
+            <div className="w-9 h-9 flex items-center justify-center shrink-0">
+              <Image src="/logo.svg" alt="NAQL Admin" width={32} height={32} className="object-contain" priority />
+            </div>
             <span className="font-bold text-white text-lg">{isAr ? 'نقل | Admin' : 'NAQL | Admin'}</span>
           </Link>
         </div>
 
         {/* Admin badge */}
-        <div className="px-4 py-3 mx-4 mt-4 rounded-lg" style={{ background: 'rgba(232,131,10,0.1)', border: '1px solid rgba(232,131,10,0.2)' }}>
+        <div className="px-4 py-3 mx-4 mt-4 rounded-lg" style={{ background: 'var(--amber-dim)', border: '1px solid var(--amber)' }}>
           <div className="text-xs text-amber/60 mb-0.5">{isAr ? 'المدير' : 'Administrator'}</div>
           <div className="text-sm font-bold text-white truncate">{currentUser?.name || 'Admin'}</div>
         </div>
@@ -44,9 +47,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={item.href}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all"
                 style={{
-                  background: active ? 'rgba(232,131,10,0.15)' : 'transparent',
-                  color: active ? '#E8830A' : 'rgba(255,255,255,0.6)',
-                  borderLeft: active ? '3px solid #E8830A' : '3px solid transparent',
+                  background: active ? 'var(--amber-dim)' : 'transparent',
+                  color: active ? 'var(--amber)' : 'rgba(255,255,255,0.6)',
+                  borderLeft: active ? '3px solid var(--amber)' : '3px solid transparent',
                 }}
               >
                 <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

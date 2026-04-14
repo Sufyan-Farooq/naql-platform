@@ -2,6 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAppContext } from '@/context/AppContext';
 
@@ -107,18 +108,14 @@ export default function PortalLayout({ children, role }: PortalLayoutProps) {
 
   return (
     <div
-      className="portal-layout"
-      style={{ fontFamily: isAr ? 'Tajawal, Cairo, sans-serif' : 'DM Sans, sans-serif' }}
+      className="portal-layout font-sans"
     >
       {/* ── SIDEBAR ── */}
       <aside className="sidebar pb-8">
         <div style={{ height:72, display:'flex', alignItems:'center', padding:'0 24px', borderBottom:'1px solid var(--border)', marginBottom:8 }}>
           <Link href="/" style={{ display:'inline-flex', alignItems:'center', gap:10, textDecoration:'none' }}>
-            <div style={{ width:32, height:32, borderRadius:6, background:'var(--amber)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-              <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
-                <path d="M2 14L6 6l4 6 4-8 4 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M18 4l-4 0 0 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <div className="w-8 h-8 flex items-center justify-center shrink-0">
+              <Image src="/logo.svg" alt="NAQL Logo" width={28} height={28} className="object-contain" priority />
             </div>
             <span style={{ fontWeight:700, fontSize:'1.1rem', color:'var(--text-primary-dark)', letterSpacing:'0.02em' }}>
               {isAr ? 'نقل' : 'NAQL'}
@@ -179,7 +176,7 @@ export default function PortalLayout({ children, role }: PortalLayoutProps) {
       <main className="portal-main">
         {/* Header */}
         <header className="portal-header">
-          <div style={{ fontWeight:700, fontSize:'1.05rem', color:'var(--text-primary-dark)', fontFamily: isAr ? 'Tajawal, Cairo, sans-serif' : 'inherit' }}>
+          <div style={{ fontWeight:700, fontSize:'1.05rem', color:'var(--text-primary-dark)' }}>
             {isAr ? currentPageTitle?.nameAr : currentPageTitle?.nameEn || (isAr ? 'لوحة التحكم' : 'Dashboard')}
           </div>
 

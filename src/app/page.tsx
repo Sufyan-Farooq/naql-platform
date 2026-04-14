@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAppContext } from '@/context/AppContext';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
@@ -514,28 +515,21 @@ export default function LandingPage() {
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <div style={{ width:38,height:38,borderRadius:6,background:'var(--amber)',display:'flex',alignItems:'center',justifyContent:'center' }}>
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                <path d="M2 14L6 6l4 6 4-8 4 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M18 4l-4 0 0 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+          <Link href="/" className="flex items-center gap-3 transition-transform hover:scale-105">
+            <div className="w-[38px] h-[38px] flex items-center justify-center shrink-0">
+              <Image src="/logo.svg" alt="NAQL Logo" width={34} height={34} className="object-contain" priority />
             </div>
             <span
-              className="font-display-ar font-bold text-xl hidden sm:block transition-colors"
-              style={{ color: 'var(--text-primary-dark)' }}
+              className="font-display-ar font-bold text-xl hidden sm:block transition-colors text-primary"
             >
               {isAr ? 'نقل | NAQL' : 'NAQL | نقل'}
             </span>
           </Link>
 
           {/* Desktop Nav Links */}
-          <div
-            className="hidden md:flex items-center gap-8 font-medium text-sm transition-colors"
-            style={{ color: 'var(--text-primary-dark)' }}
-          >
+          <div className="hidden md:flex items-center gap-8 font-medium text-sm transition-colors text-primary">
             {[['#how-it-works', t.navHow], ['#services', t.navServices], ['#why-naql', t.navWhy], ['#contact', t.navContact]].map(([href, label]) => (
-              <a key={href} href={href} className="hover:text-amber transition-colors" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <a key={href} href={href} className="hover:text-amber transition-colors no-underline text-inherit">
                 {label}
               </a>
             ))}
@@ -574,11 +568,7 @@ export default function LandingPage() {
 
             <Link
               href="/auth/login"
-              className="btn-ghost hidden sm:inline-flex"
-              style={{
-                color: 'var(--text-primary-dark)',
-                borderColor: 'var(--border)',
-              }}
+              className="btn-ghost hidden sm:inline-flex text-primary border-sand"
             >
               {t.navLogin}
             </Link>
@@ -723,7 +713,7 @@ export default function LandingPage() {
                 : ['Full Truck Load','Less Than Truck','Refrigerated','Heavy Hauling','Hazardous','Cross-border GCC','GPS Tracking','ZATCA Invoicing','Bayan Waybills']
               ).map((s, i) => (
                 <span key={i} style={{ display:'inline-flex', alignItems:'center', gap:24 }}>
-                  <span style={{ color:'#0D1B2A', fontWeight:700, fontSize:14, fontFamily: isAr ? 'Tajawal,Cairo,sans-serif' : 'Syne,sans-serif', padding:'0 32px' }}>{s}</span>
+                  <span style={{ color:'#0D1B2A', fontWeight:700, fontSize:14, padding:'0 32px' }}>{s}</span>
                   <span style={{ color:'rgba(13,27,42,0.4)', fontSize:10 }}>◆</span>
                 </span>
               ))}
@@ -761,7 +751,6 @@ export default function LandingPage() {
                     background: flowTab === tab ? 'var(--amber)' : 'transparent',
                     color: flowTab === tab ? 'white' : 'var(--text-muted)',
                     transition:'all 0.2s',
-                    fontFamily: isAr ? 'Tajawal,Cairo,sans-serif' : 'inherit',
                   }}
                 >
                   {tab === 'shipper' ? t.tabShipper : t.tabCarrier}
@@ -896,7 +885,7 @@ export default function LandingPage() {
           <div className="reveal" style={{ textAlign:'center', marginBottom:48 }}>
             <h2
               className={isAr ? 'font-display-ar' : 'font-display-en'}
-              style={{ fontSize:'clamp(1.6rem,3vw,2.5rem)', fontWeight:900, color:'#0D1B2A' }}
+              style={{ fontSize:'clamp(1.6rem,3vw,2.5rem)', fontWeight:900, color:'var(--navy)' }}
             >
               {t.statsTitle}
             </h2>
@@ -909,10 +898,10 @@ export default function LandingPage() {
               { ref:carriers.ref, count:carriers.count, suffix:'+', label:t.statCarriers, note:'' },
             ].map((s, i) => (
               <div key={i} ref={s.ref as React.RefObject<HTMLDivElement>} className={`reveal reveal-delay-${i + 1}`} style={{ textAlign:'center' }}>
-                <div className="font-mono" style={{ fontSize:'clamp(2.5rem,5vw,4rem)', fontWeight:900, color:'#0D1B2A', lineHeight:1 }}>
+                <div className="font-mono text-[clamp(2.5rem,5vw,4rem)] font-black text-primary leading-none">
                   {s.suffix}{s.comma ? s.count.toLocaleString() : s.count}
                 </div>
-                <div style={{ marginTop:8, fontSize:'1rem', fontWeight:700, color:'rgba(13,27,42,0.75)', fontFamily: isAr ? 'Tajawal,Cairo,sans-serif' : 'inherit' }}>
+                <div className="mt-2 text-base font-bold text-muted">
                   {s.label}
                 </div>
               </div>
@@ -1285,13 +1274,10 @@ export default function LandingPage() {
             {/* Brand */}
             <div>
               <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:16 }}>
-                <div style={{ width:36, height:36, borderRadius:6, background:'var(--amber)', display:'flex', alignItems:'center', justifyContent:'center' }}>
-                  <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
-                    <path d="M2 14L6 6l4 6 4-8 4 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M18 4l-4 0 0 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                <div className="w-9 h-9 flex items-center justify-center shrink-0">
+                  <Image src="/logo.svg" alt="NAQL Logo" width={30} height={30} className="object-contain" />
                 </div>
-                <span style={{ color:'var(--text-navy)', fontWeight:700, fontSize:'1.2rem', fontFamily: isAr ? 'Tajawal,Cairo,sans-serif' : 'Syne,sans-serif' }}>
+                <span className="text-white font-bold text-[1.2rem] transition-colors hover:text-amber">
                   {isAr ? 'نقل | NAQL' : 'NAQL | نقل'}
                 </span>
               </div>

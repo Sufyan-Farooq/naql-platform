@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAppContext } from '@/context/AppContext';
@@ -77,9 +78,11 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen font-ar" style={{ background: 'var(--surface)' }}>
       {/* Left Panel */}
-      <div className="hidden lg:flex flex-col w-[45%] text-[#FAF7F2] p-12 relative overflow-hidden grain" style={{ background: '#0D1B2A' }}>
+      <div className="hidden lg:flex flex-col w-[45%] text-white p-12 relative overflow-hidden grain" style={{ background: 'var(--navy)' }}>
         <Link href="/" className="inline-flex items-center gap-3 z-10 w-fit cursor-pointer">
-          <div className="w-10 h-10 rounded-lg bg-amber flex items-center justify-center font-display-ar font-bold text-white text-xl">N</div>
+          <div className="w-10 h-10 flex items-center justify-center shrink-0">
+            <Image src="/logo.svg" alt="NAQL" width={40} height={40} className="object-contain" priority />
+          </div>
           <span className="font-display-ar font-bold text-2xl tracking-wide">{isAr ? 'نقل | NAQL' : 'NAQL | نقل'}</span>
         </Link>
         
@@ -120,7 +123,9 @@ export default function LoginPage() {
 
         <div className="w-full max-w-[420px]">
           <Link href="/" className="lg:hidden flex items-center gap-3 mb-10 w-fit mx-auto">
-            <div className="w-10 h-10 rounded-lg bg-amber flex items-center justify-center font-bold text-white text-xl">N</div>
+            <div className="w-10 h-10 flex items-center justify-center shrink-0">
+              <Image src="/logo.svg" alt="NAQL" width={40} height={40} className="object-contain" priority />
+            </div>
             <span className="font-bold text-2xl" style={{ color: 'var(--text-primary-dark)' }}>{isAr ? 'نقل | NAQL' : 'NAQL | نقل'}</span>
           </Link>
 

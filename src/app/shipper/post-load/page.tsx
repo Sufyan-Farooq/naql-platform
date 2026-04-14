@@ -132,7 +132,7 @@ export default function PostLoadPage() {
   };
 
   return (
-    <div className={`max-w-5xl mx-auto bg-white rounded-xl shadow-sm border border-surface-mid overflow-hidden min-h-[600px] flex flex-col ${isAr ? 'font-display-ar' : ''}`}>
+    <div className={`max-w-5xl mx-auto bg-surface rounded-xl shadow-sm border border-surface-mid overflow-hidden min-h-[600px] flex flex-col ${isAr ? 'font-display-ar' : ''}`}>
       <div className="bg-navy p-8 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 grain pointer-events-none" />
         <h1 className="text-2xl font-bold mb-8 relative z-10">{t.title}</h1>
@@ -245,7 +245,7 @@ export default function PostLoadPage() {
                            </select>
                         </td>
                         <td className="py-4 px-2">
-                           <input type="number" required min="1" className="naql-input text-center font-mono" value={route.truckCount} onChange={(e) => handleRouteChange(idx, 'truckCount', parseInt(e.target.value))} />
+                           <input type="number" required min="1" className="naql-input text-center font-mono" value={route.truckCount || ''} onChange={(e) => handleRouteChange(idx, 'truckCount', e.target.value === '' ? '' : parseInt(e.target.value))} />
                         </td>
                         <td className="py-4 px-2 text-center">
                            {routes.length > 1 && (
@@ -316,7 +316,7 @@ export default function PostLoadPage() {
                     <span className="block text-text-muted text-xs mb-2 uppercase tracking-wide font-bold">{t.routeLabel}</span>
                     <div className="space-y-2">
                        {routes.map((r, i) => (
-                         <div key={i} className="flex items-center justify-between bg-white p-3 rounded-lg border border-surface-mid">
+                         <div key={i} className="flex items-center justify-between bg-surface p-3 rounded-lg border border-surface-mid">
                             <div className="flex items-center gap-4">
                                <span className="w-6 h-6 rounded bg-navy text-white flex items-center justify-center text-[10px] font-bold">{i+1}</span>
                                <span className="font-bold text-navy">{r.origin}</span>
@@ -333,7 +333,7 @@ export default function PostLoadPage() {
                   </div>
                   <div><span className="block text-text-muted text-xs mb-1 uppercase font-bold">{t.typeLabel}</span><strong>{cargoType}</strong></div>
                   <div><span className="block text-text-muted text-xs mb-1 uppercase font-bold">{t.revWeightLabel}</span><strong className="font-mono">{weight} {t.tons}</strong></div>
-                  <div className="col-span-2"><span className="block text-text-muted text-xs mb-1 uppercase font-bold">{t.descLabel}</span><strong className="leading-relaxed bg-white p-4 rounded block border border-surface-mid mt-1">{cargoContent}</strong></div>
+                  <div className="col-span-2"><span className="block text-text-muted text-xs mb-1 uppercase font-bold">{t.descLabel}</span><strong className="leading-relaxed bg-surface p-4 rounded block border border-surface-mid mt-1">{cargoContent}</strong></div>
                 </div>
               </div>
             </div>

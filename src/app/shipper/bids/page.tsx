@@ -27,14 +27,14 @@ export default function ShipperBidsView() {
   const allLoads = getLoadsForCurrentUser();
   
   const displayLoads = allLoads.filter(load => {
-    const loadBids = bids.filter(b => b.loadId === load.id);
-    const hasPending = loadBids.some(b => b.status === 'PENDING');
-    const hasAccepted = loadBids.some(b => b.status === 'ACCEPTED');
+    const bidsCount = load._count?.bids || 0;
+    const hasPending = bidsCount > 0; // Simplified logic since we don't have all bid statuses globally
+    const hasAccepted = load.status !== 'ACTIVE'; // Status changes once a bid is accepted
 
-    if (loadBids.length === 0 && load.status !== 'ACTIVE') return false;
+    if (bidsCount === 0 && load.status !== 'ACTIVE') return false;
 
-    if (filter === 'NEW' && (!hasPending || hasAccepted)) return false;
-    if (filter === 'COMPLETED' && !hasAccepted) return false;
+    if (filter === 'NEW' && (!hasPending || load.status !== 'ACTIVE')) return false;
+    if (filter === 'COMPLETED' && load.status === 'ACTIVE') return false;
 
     return true;
   });
@@ -53,12 +53,12 @@ export default function ShipperBidsView() {
 
       <div className="grid grid-cols-1 gap-4">
         {displayLoads.map(load => {
-          const loadBids = bids.filter(b => b.loadId === load.id);
-          const hasPending = loadBids.some(b => b.status === 'PENDING');
-          const hasAccepted = loadBids.some(b => b.status === 'ACCEPTED');
+          const bidsCount = load._count?.bids || 0;
+          const hasPending = bidsCount > 0;
+          const hasAccepted = load.status !== 'ACTIVE';
 
           return (
-            <div key={load.id} className={`card p-6 flex flex-col md:flex-row md:items-center gap-6 ${hasPending && !hasAccepted ? 'card-amber-border' : ''}`}>
+            <div key={load.id} className={`card p-6 flex flex-col md:flex-row md:items-center gap-6 ${hasPending && load.status === 'ACTIVE' ? 'card-amber-border' : ''}`}>
                {/* Mobile Header Data */}
                <div className="flex-1 space-y-3">
                   <div className="flex items-center gap-3">
@@ -95,8 +95,8 @@ export default function ShipperBidsView() {
                   <div className="flex-1 text-center">
                      <div className="text-text-muted text-xs mb-1 font-bold">{t.received}</div>
                      <div className="font-mono text-3xl font-bold text-primary">
-                        {loadBids.length} 
-                        {hasPending && !hasAccepted && <span className="w-2.5 h-2.5 bg-amber rounded-full inline-block mr-2 transform -translate-y-2 pulse-amber" />}
+                        {bidsCount} 
+                        {hasPending && load.status === 'ACTIVE' && <span className="w-2.5 h-2.5 bg-amber rounded-full inline-block mr-2 transform -translate-y-2 pulse-amber" />}
                      </div>
                   </div>
                   

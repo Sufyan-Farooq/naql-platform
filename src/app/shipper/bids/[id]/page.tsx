@@ -110,7 +110,7 @@ export default function BidManagementDetail() {
             <div className="space-y-3">
               {load.routes.map((r, i) => (
                 <div key={i} className="flex flex-col md:flex-row md:items-center gap-3 bg-white/5 p-4 rounded-lg border border-white/10">
-                  <div className={`text-lg font-bold flex items-center gap-3 ${isAr ? 'font-display-ar' : ''} flex-1`}>
+                  <div className={`text-lg font-bold flex items-center gap-3 ${isAr ? 'font-display-ar' : ''} flex-1 text-white`}>
                     <span className="w-6 h-6 rounded bg-amber text-navy flex items-center justify-center text-[10px] font-bold">{i+1}</span>
                     {r.origin}
                     <svg className={`w-4 h-4 text-amber transform ${isAr ? '' : 'rotate-180'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -123,9 +123,9 @@ export default function BidManagementDetail() {
                         <span className="text-white/60">{r.truckType}</span>
                         <span className="bg-amber text-navy px-2 py-0.5 rounded font-bold">x{r.truckCount}</span>
                      </div>
-                     {lowestPerRoute[i] !== Infinity && (
-                       <div className="text-[10px] text-teal font-bold">{isAr ? 'أقل سعر متاح' : 'Lowest Available'}: {lowestPerRoute[i]} {t.sar}</div>
-                     )}
+                      {lowestPerRoute[i] !== Infinity && (
+                        <div className="text-[10px] text-amber font-bold">{isAr ? 'أقل سعر متاح' : 'Lowest Available'}: {lowestPerRoute[i]} {t.sar}</div>
+                      )}
                   </div>
                 </div>
               ))}
@@ -133,9 +133,9 @@ export default function BidManagementDetail() {
           </div>
         </div>
         <div className="flex flex-wrap gap-4 pt-4 border-t border-white/10">
-          <div><span className="block text-white/50 text-xs mb-1">{t.weight}</span><span className="font-mono font-bold">{load.cargoWeight} {t.tons}</span></div>
+          <div><span className="block text-white/50 text-xs mb-1 font-bold">{t.weight}</span><span className="font-mono font-bold text-white">{load.cargoWeight} {t.tons}</span></div>
           <div className="w-px bg-white/10" />
-          <div className="flex-1"><span className="block text-white/50 text-xs mb-1">{t.notes}</span><span className="text-xs italic opacity-70 line-clamp-1">{load.cargoContent}</span></div>
+          <div className="flex-1"><span className="block text-white/50 text-xs mb-1 font-bold">{t.notes}</span><span className="text-sm font-bold text-white line-clamp-1">{load.cargoContent}</span></div>
           {load.status === 'ACTIVE' && (
              <div className="text-right">
                <div className="text-[10px] text-white/60 uppercase mb-1">{t.auctionEnd}</div>

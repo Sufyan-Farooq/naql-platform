@@ -5,6 +5,9 @@ import { AppProvider } from '@/context/AppContext';
 export const metadata: Metadata = {
   title: 'NAQL (نقل) | Saudi Freight Aggregator',
   description: 'One Point of Contact. Bigger Buying Power. Better Rates. — منصة نقل للشحن بالسعودية',
+  icons: {
+    icon: '/logo.svg',
+  },
 };
 
 // Anti-flash script — runs before React hydrates to apply saved theme/lang

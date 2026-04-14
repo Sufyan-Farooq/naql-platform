@@ -41,7 +41,7 @@ export default function ShipperDashboard() {
 
   const activeLoads = loads.filter(l => l.status === 'ACTIVE').length;
   const activeTripsCount = (trips || []).filter(t => t.status === 'IN_TRANSIT').length;
-  const deliveredThisMonth = 42; // Dummy stat
+  const deliveredThisMonth = loads.filter(l => l.status === 'DELIVERED').length;
 
   return (
     <div className={`max-w-6xl mx-auto space-y-8 ${isAr ? 'font-ar' : 'font-en'}`} dir={isAr ? 'rtl' : 'ltr'}>
@@ -49,8 +49,8 @@ export default function ShipperDashboard() {
       <div className="bg-navy text-white p-8 rounded-2xl flex justify-between items-center relative overflow-hidden card-dark">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber via-navy to-navy pointer-events-none" />
         <div className="relative z-10">
-          <h1 className={`${isAr ? 'font-display-ar' : 'font-display-en'} text-3xl font-bold mb-2`}>{t.greeting}</h1>
-          <p className="text-white/70 text-lg">{t.greetingSub}</p>
+          <h1 className={`${isAr ? 'font-display-ar' : 'font-display-en'} text-3xl font-bold mb-2 text-white`}>{t.greeting}</h1>
+          <p className="text-white/80 text-lg">{t.greetingSub}</p>
         </div>
         <Link href="/shipper/post-load" className="btn-primary h-14 px-8 text-lg relative z-10 shadow-lg shadow-amber/20 hidden md:flex">
           {t.postLoadBtn}
@@ -140,7 +140,7 @@ export default function ShipperDashboard() {
                   <td>
                     {load.status === 'ACTIVE' ? (
                       <Link href={`/shipper/bids/${load.id}`} className="font-mono font-bold text-amber hover:underline flex items-center gap-1">
-                        {load.bidsCount} {t.bcount} <span className="pulse-amber w-1.5 h-1.5 rounded-full inline-block mr-1"></span>
+                        {load._count?.bids || 0} {t.bcount} <span className="pulse-amber w-1.5 h-1.5 rounded-full inline-block mr-1"></span>
                       </Link>
                     ) : (
                       <span className="text-text-muted text-xs">—</span>

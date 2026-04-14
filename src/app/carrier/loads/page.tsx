@@ -303,7 +303,7 @@ export default function CarrierLoadBoard() {
       </div>
 
       {selectedLoad && (
-        <div className="absolute inset-0 bg-white/95 backdrop-blur-sm z-50 rounded-xl border border-surface-mid flex flex-col shadow-2xl overflow-hidden fade-in">
+        <div className="absolute inset-0 bg-surface z-50 rounded-xl border border-surface-mid flex flex-col shadow-2xl overflow-hidden fade-in">
           {showSuccess ? (
             <div className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-amber">
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-amber mb-6 shadow-xl">
@@ -321,7 +321,7 @@ export default function CarrierLoadBoard() {
                   </button>
                   <h2 className={`text-xl font-bold ${isAr ? 'font-display-ar' : ''}`} style={{ color: 'var(--text-primary-dark)' }}>{t.modalTitle}</h2>
                 </div>
-                <div className="font-mono font-bold text-navy bg-white px-3 py-1.5 rounded">{selectedLoad.refNumber}</div>
+                <div className="font-mono font-bold text-navy bg-surface-card px-3 py-1.5 rounded">{selectedLoad.refNumber}</div>
               </div>
 
               <div className="flex-1 flex overflow-hidden">
@@ -334,22 +334,22 @@ export default function CarrierLoadBoard() {
                        {selectedLoad.routes?.map((r, i) => (
                          <div key={i} className="flex items-center gap-4 bg-white/5 p-3 rounded-lg border border-white/10">
                             <span className="w-6 h-6 rounded bg-amber text-navy flex items-center justify-center text-[10px] font-bold">{i+1}</span>
-                            <span className="font-bold">{r.origin}</span>
-                            <svg className={`w-4 h-4 text-amber transform ${isAr ? '' : 'rotate-180'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-                            <span className="font-bold">{r.destination}</span>
-                            <div className="mr-auto text-xs bg-white/10 px-2 py-1 rounded">
-                               {r.truckType} <span className="text-amber font-bold ml-1">x{r.truckCount}</span>
-                            </div>
+                             <span className="font-bold text-white">{r.origin}</span>
+                             <svg className={`w-4 h-4 text-amber transform ${isAr ? '' : 'rotate-180'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                             <span className="font-bold text-white">{r.destination}</span>
+                             <div className="mr-auto text-xs bg-white/10 px-2 py-1 rounded text-white">
+                                {r.truckType} <span className="text-amber font-bold ml-1">x{r.truckCount}</span>
+                             </div>
                          </div>
                        ))}
                     </div>
 
                     <div className="flex flex-wrap gap-4 pt-6 mt-4 border-t border-white/10">
-                      <div><span className="block text-white/50 text-xs mb-1">{t.weight}</span><span className="font-mono font-bold">{selectedLoad.cargoWeight} {t.tons}</span></div>
+                      <div><span className="block text-white/50 text-xs mb-1">{t.weight}</span><span className="font-mono font-bold text-white">{selectedLoad.cargoWeight} {t.tons}</span></div>
                       <div className="w-px bg-white/10" />
-                      <div><span className="block text-white/50 text-xs mb-1">{isAr ? 'نوع البضاعة' : 'Cargo Type'}</span><span className="font-bold text-sm">{selectedLoad.cargoType}</span></div>
+                      <div><span className="block text-white/50 text-xs mb-1">{isAr ? 'نوع البضاعة' : 'Cargo Type'}</span><span className="font-bold text-sm text-white">{selectedLoad.cargoType}</span></div>
                       <div className="w-px bg-white/10" />
-                      <div><span className="block text-white/50 text-xs mb-1">{t.cargo}</span><span className="font-bold text-sm">{selectedLoad.cargoContent}</span></div>
+                      <div><span className="block text-white/50 text-xs mb-1">{t.cargo}</span><span className="font-bold text-sm text-white">{selectedLoad.cargoContent}</span></div>
                     </div>
                   </div>
 
@@ -369,7 +369,7 @@ export default function CarrierLoadBoard() {
 
                       <div className="space-y-3">
                         {selectedLoad.routes?.map((r, i) => (
-                          <div key={i} className="flex items-center gap-4 bg-white p-3 rounded-lg border border-sand shadow-sm hover:border-amber transition-colors">
+                          <div key={i} className="flex items-center gap-4 bg-surface p-3 rounded-lg border border-sand shadow-sm hover:border-amber transition-colors">
                             <div className="flex-1">
                               <div className="text-xs font-bold text-navy mb-1">{r.origin} → {r.destination}</div>
                               <div className="text-[10px] text-text-muted">{r.truckType} x{r.truckCount}</div>
@@ -398,7 +398,7 @@ export default function CarrierLoadBoard() {
                       </div>
                     </div>
 
-                    <div className="card p-6 border-sand bg-white">
+                    <div className="card p-6 border-sand bg-surface">
                       <label className="naql-label">{t.notesLabel}</label>
                       <textarea className="naql-input h-24 py-3 resize-none" placeholder={t.notesPlaceholder} value={bidNotes} onChange={e => setBidNotes(e.target.value)} />
                     </div>
