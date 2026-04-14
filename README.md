@@ -54,8 +54,9 @@ npm run dev
 
 | Role | Email | Password |
 | :--- | :--- | :--- |
-| **Shipper** | `ship3@test.com` | `password123` |
-| **Carrier** | `car3@test.com` | `password123` |
+| **Admin** | `admin@naql.sa` | `Admin@1234` |
+| **Shipper** | `shipper@test.com` | `test1234` |
+| **Carrier** | `carrier@test.com` | `test1234` |
 
 *Note: Use these credentials to explore the platform's multi-route bidding and shipment management features.*
 

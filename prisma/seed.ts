@@ -42,6 +42,21 @@ async function main() {
     },
   })
 
+  // Create admin user
+  const adminHash = await bcrypt.hash('Admin@1234', 12)
+  await prisma.user.upsert({
+    where: { email: 'admin@naql.sa' },
+    update: {},
+    create: {
+      email: 'admin@naql.sa',
+      passwordHash: adminHash,
+      name: 'نظام الإدارة',
+      company: 'ناقل - الإدارة العامة',
+      role: 'ADMIN',
+      status: 'APPROVED',
+    },
+  })
+
   console.log('✅ Seed successful!')
   console.log('   Admin: admin@naql.sa / Admin@1234')
   console.log('   Shipper: shipper@test.com / test1234')
